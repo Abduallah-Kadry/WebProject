@@ -1,20 +1,21 @@
 {% extends 'LibraryApp/base.html' %}
 {% block  body %}
     <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <h3>Login</h3><br>
 
         <div>
             <label>Email</label>
-            <input type="text"><br>
+            <input type="text" name ='email'><br>
         </div>
 
         <div>
             <label>Password</label>
-            <input type="password"><br>
+            <input type="password" name="password"><br>
         </div>
 
         <div class="buttonDiv">
-            <input type="button" value="login" onclick="location.href='{% url 'home' %}'">
+            <input type="submit" value="login">
             <input type="button" value="Back" onclick="location.href='{% url 'home' %}'">
         </div>
 

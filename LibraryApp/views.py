@@ -20,7 +20,7 @@ def register(request):
         if request.POST.get('radbtn') == 'userRadio':
             acctype = 'user'
         else:
-            acctype = 'librarian'
+            acctype = 'librarian'   
 
         account = Accounts(name=name, email=email, password=password, accType=acctype, phone=phone)
         account.save()
@@ -30,8 +30,8 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        if request.POST.get('name') == Accounts.objects.get('name') & request.POST.get(
-                'password') == Accounts.objects.get('password'):
+        if request.POST.get('email') == Accounts.objects.get('email') & request.POST.get(
+                'password') == Accounts.objects.get('password',):
             if Accounts.objects.get('accType') == 'user':
                 return redirect('user.html')
             else:
