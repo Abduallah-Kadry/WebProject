@@ -11,7 +11,6 @@ def home(request):
     return render(request, 'LibraryApp/home.html')
 
 
-@login_required
 def register(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -23,13 +22,21 @@ def register(request):
         else:
             acctype = 'librarian'
 
-        account = Accounts(name=name, email=email, password=password, accType=acctype,phone=phone)
+        account = Accounts(name=name, email=email, password=password, accType=acctype, phone=phone)
         account.save()
 
     return render(request, 'LibraryApp/registration.html')
 
 
 def login(request):
+    if request.method == 'POST':
+        if request.POST.get('name') == Accounts.objects.get('name') & request.POST.get(
+                'password') == Accounts.objects.get('password'):
+            if Accounts.objects.get('accType') == 'user':
+                return redirect('user.html')
+            else:
+                return redirect('librarian.html')
+
     return render(request, 'LibraryApp/login.html')
 
 
