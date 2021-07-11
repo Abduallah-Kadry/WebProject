@@ -1,0 +1,23 @@
+{% extends 'LibraryApp/base.html' %}
+{% block  body %}
+    <form>
+        <h3>Login</h3><br>
+
+        <div>
+            <label>Email</label>
+            <input type="text"><br>
+        </div>
+
+        <div>
+            <label>Password</label>
+            <input type="password"><br>
+        </div>
+
+        <div class="buttonDiv">
+            <input type="button" value="login" onclick="location.href='{% url 'home' %}'">
+            <input type="button" value="Back" onclick="location.href='{% url 'home' %}'">
+        </div>
+
+
+    </form>
+{% endblock %}

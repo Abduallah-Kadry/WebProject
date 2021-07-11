@@ -1,0 +1,17 @@
+{% extends 'LibraryApp/base.html' %}
+{% block body %}
+    <form>
+        <h3>Feedback</h3><br>
+        <div>
+            <textarea rows="10" maxlength="650"></textarea>
+        </div>
+
+
+        <div class="buttonDiv">
+            <input type="submit" onclick="location.href='{% url 'home' %}'">
+            <input type="button" value="Back" onclick="location.href='{% url 'home' %}'">
+        </div>
+
+
+    </form>
+{% endblock %}

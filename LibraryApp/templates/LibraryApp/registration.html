@@ -1,0 +1,37 @@
+{% extends 'LibraryApp/base.html' %}
+{% block  body %}
+    <form>
+        <h3>Registration</h3>
+        <div>
+            <label>Username</label>
+            <input type="text"><br>
+        </div><div>
+            <label>Email</label>
+            <input type="text"><br>
+        </div>
+
+        <div>
+            <label>Password</label>
+            <input type="password"><br>
+        </div>
+        <div>
+            <label>Password(again)</label>
+            <input type="password"><br>
+        </div>
+
+        <div>
+            <label>Sign up as:</label>
+            <input type="radio" id="studentRadio" name="radbtn"> user<br>
+            <input type="radio" id="librarianRadio" name="radbtn"> Librarian<br>
+
+        </div>
+        <div class="buttonDiv">
+            <input type="submit">
+            <input type="button" value="Back" onclick="location.href='{% url 'home' %}'">
+
+        </div>
+
+
+    </form>
+
+{% endblock %}
