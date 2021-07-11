@@ -1,29 +1,35 @@
 {% extends 'LibraryApp/base.html' %}
 {% block  body %}
-    <form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <h3>Registration</h3>
         <div>
             <label>Username</label>
-            <input type="text"><br>
+            <input type="text" name="name" id="name"><br>
         </div>
         <div>
             <label>Email</label>
-            <input type="text"><br>
+            <input type="text" name="email" id="email"><br>
         </div>
 
         <div>
             <label>Password</label>
-            <input type="password"><br>
+            <input type="password" name="password1" id="password1"><br>
         </div>
         <div>
             <label>Password(again)</label>
-            <input type="password"><br>
+            <input type="password" name="password2" id="password2"><br>
+        </div>
+
+         <div>
+            <label>Phone</label>
+            <input type="number" name="phone" id="phone"><br>
         </div>
 
         <div>
             <label>Sign up as:</label>
-            <input type="radio" id="studentRadio" name="radbtn"> user<br>
-            <input type="radio" id="librarianRadio" name="radbtn"> Librarian<br>
+            <input type="radio" value="userRadio" name="radbtn"> user<br>
+            <input type="radio" value="librarianRadio" name="radbtn"> Librarian<br>
 
         </div>
         <div class="buttonDiv">

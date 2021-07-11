@@ -23,4 +23,4 @@ class Accounts(models.Model):
     password = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
-    type = models.CharField(max_length=100)
+    accType = models.CharField(max_length=100)
