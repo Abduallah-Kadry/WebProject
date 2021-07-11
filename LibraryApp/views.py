@@ -22,7 +22,9 @@ def librarian(request):
 
 
 def user(request):
-    return render(request, 'LibraryApp/user.html')
+    books = Book.objects.all()
+
+    return render(request, 'LibraryApp/user.html', {'book_list': books})
 
 
 def feedback(request):
