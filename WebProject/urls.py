@@ -28,6 +28,10 @@ urlpatterns = [
     path('librarian/',views.librarian,name='librarian' ),
     path('feedback/',views.feedback,name='feedback' ),
     path('addBook/',views.add_book,name='addBook' ),
+    path('bookDetails/<int:book_id>',views.book_details,name='bookDetails' ),
+    path('delete/<int:book_id>',views.book_delete,name='deleteBook' ),
+    path('edit/<int:book_id>',views.book_edit,name='editBook' ),
+    path('borrow/<int:book_id>',views.book_borrow,name='borrowBook' ),
 
 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

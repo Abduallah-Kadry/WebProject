@@ -5,7 +5,8 @@
     </div>
     <div class="bookList">
         {% for book in book_list %}
-            <a href="#">{{ book.name }}</a><br>
+
+           {{ book.id }} <a href="{% url 'bookDetails' book.id %}">{{book.name}}</a><br>
         {% endfor %}
     </div>
 

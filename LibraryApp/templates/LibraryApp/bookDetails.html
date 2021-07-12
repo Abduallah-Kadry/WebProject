@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'LibraryApp/base.html' %}
+{% block  body %}
+    <div>
+        <h1>{{ book.name }} Full Details</h1>
+        <p>Name: {{ book.name }}</p>
+        <p>BookId: {{ book.id }}</p>
+        <p>Description: {{ book.description }}</p>
+        <p>ISBN: {{ book.ISBN }}</p>
+        <p>Author: {{ book.author }}</p>
+        <p>Publication Year: {{ book.publication_year }}</p>
+    </div>
+    <div class="buttonDiv">
+        <input type="button" value="Edit Book" onclick="location.href='{% url 'editBook' book.id %}'">
+        <input type="button" value="Delete Book" onclick="location.href='{% url 'deleteBook' book.id %}'">
+        <input type="button" value="Borrow Book" onclick="location.href='{% url 'borrowBook' book.id %}'">
 
-</body>
-</html>
+    </div>
+
+{% endblock %}

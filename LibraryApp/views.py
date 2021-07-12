@@ -67,3 +67,23 @@ def add_book(request):
         book.save()
 
     return render(request, 'LibraryApp/addBook.html')
+
+
+def book_details(request, book_id):
+    book = Book.objects.get(id=book_id)
+    return render(request, 'LibraryApp/bookDetails.html', {'book': book})
+
+
+def book_delete(request, book_id):
+    book = Book.objects.get(id=book_id)
+    return render(request, 'LibraryApp/delete.html', {'book': book})
+
+
+def book_edit(request, book_id):
+    book = Book.objects.get(id=book_id)
+    return render(request, 'LibraryApp/editBook.html', {'book': book})
+
+
+def book_borrow(request, book_id):
+    book = Book.objects.get(id=book_id)
+    return render(request, 'LibraryApp/borrow.html', {'book': book})
