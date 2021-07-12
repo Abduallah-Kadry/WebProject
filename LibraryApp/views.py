@@ -20,7 +20,7 @@ def register(request):
         if request.POST.get('radbtn') == 'userRadio':
             acctype = 'user'
         else:
-            acctype = 'librarian'   
+            acctype = 'librarian'
 
         account = Accounts(name=name, email=email, password=password, accType=acctype, phone=phone)
         account.save()
@@ -30,8 +30,9 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        if request.POST.get('email') == Accounts.objects.get('email') & request.POST.get(
-                'password') == Accounts.objects.get('password',):
+        emailtemp = request.POST.get('email')
+        passTemp = request.POST.get('password')
+        if emailtemp == Accounts.objects.get(email=emailtemp) & passTemp == Accounts.objects.get(password=passTemp):
             if Accounts.objects.get('accType') == 'user':
                 return redirect('user.html')
             else:
@@ -52,3 +53,17 @@ def user(request):
 
 def feedback(request):
     return render(request, 'LibraryApp/feedback.html')
+
+
+def add_book(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('Description')
+        ISBN = request.POST.get('ISBN')
+        author = request.POST.get('author')
+        publication_year = request.POST.get('publication_year')
+
+        book = Book(name=name, desc=description, ISBN=ISBN, author=author, publication_year=publication_year)
+        book.save()
+
+    return render(request, 'LibraryApp/addBook.html')

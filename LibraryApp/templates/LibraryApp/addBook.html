@@ -1,0 +1,38 @@
+{% extends 'LibraryApp/base.html' %}
+{% block  body %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="text-align: left">Add Book</h3><br>
+
+        <div>
+            <label>name</label>
+            <input type="text" name='name'><br>
+        </div>
+        <div>
+            <label>Description</label>
+            <input type="text" name="Description"><br>
+        </div>
+        <div>
+            <label>ISBN</label>
+            <input type="text" name="ISBN"><br>
+        </div>
+        <div>
+            <label>Author</label>
+            <input type="text" name="author"><br>
+        </div>
+        <div>
+            <label>Publication Year</label>
+            <input type="text" name="publication_year"><br>
+        </div>
+
+
+        <div class="buttonDiv">
+            <input type="submit" value="Add book">
+            <input type="button" value="Back" onclick="location.href='{% url 'home' %}'">
+        </div>
+
+
+    </form>
+
+{% endblock %}

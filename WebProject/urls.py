@@ -27,6 +27,7 @@ urlpatterns = [
     path('user/',views.user,name='user' ),
     path('librarian/',views.librarian,name='librarian' ),
     path('feedback/',views.feedback,name='feedback' ),
+    path('addBook/',views.add_book,name='addBook' ),
 
 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
