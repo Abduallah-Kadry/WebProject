@@ -32,6 +32,7 @@ urlpatterns = [
     path('delete/<int:book_id>',views.book_delete,name='deleteBook' ),
     path('edit/<int:book_id>',views.book_edit,name='editBook' ),
     path('borrow/<int:book_id>',views.book_borrow,name='borrowBook' ),
+    path('error/',views.error,name='error' ),
 
 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

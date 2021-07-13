@@ -13,10 +13,25 @@ def home(request):
 
 def register(request):
     if request.method == 'POST':
+
         name = request.POST.get('name')
         email = request.POST.get('email')
+        try:
+            Accounts.objects.get(email=email)
+        except Accounts.MultipleObjectsReturned:
+            return redirect('register')
+        except Accounts.DoesNotExist:
+            pass
+
         password = request.POST.get('password1')
         phone = request.POST.get('phone')
+        try:
+            Accounts.objects.get(phone=phone)
+        except Accounts.MultipleObjectsReturned:
+            return redirect('register')
+        except Accounts.DoesNotExist:
+            pass
+
         if request.POST.get('radbtn') == 'userRadio':
             acctype = 'user'
         else:
@@ -30,19 +45,23 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        emailtemp = request.POST.get('email')
-        passTemp = request.POST.get('password')
-        if emailtemp == Accounts.objects.get(email=emailtemp) & passTemp == Accounts.objects.get(password=passTemp):
-            if Accounts.objects.get('accType') == 'user':
-                return redirect('user.html')
-            else:
-                return redirect('librarian.html')
+        try:
+            account = Accounts.objects.get(password='123456789')
+            return redirect('user')
+        except Accounts.DoesNotExist:
+            return redirect('error')
+        except Accounts.MultipleObjectsReturned:
+            return redirect('librarian')
 
     return render(request, 'LibraryApp/login.html')
 
 
 def librarian(request):
     return render(request, 'LibraryApp/librarian.html')
+
+
+def error(request):
+    return render(request, 'LibraryApp/error.html')
 
 
 def user(request):
