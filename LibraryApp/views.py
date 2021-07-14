@@ -33,9 +33,9 @@ def register(request):
             pass
 
         if request.POST.get('radbtn') == 'userRadio':
-            acctype = 'user'
+            acctype = 'User'
         else:
-            acctype = 'librarian'
+            acctype = 'Librarian'
 
         account = Accounts(name=name, email=email, password=password, accType=acctype, phone=phone)
         account.save()
@@ -56,27 +56,27 @@ def login(request):
         except Accounts.MultipleObjectsReturned:
             pass
 
-        if account_email.accType == 'librarian':
-            return redirect('librarian')
-        else:
-            return redirect('user')
+        return login_successful(request, account_email)
 
-    return render(request, 'LibraryApp/login.html', {'account-type': Accounts.accType})
+    return render(request, 'LibraryApp/login.html')
 
 
-def login_successful(request):
-
-    return render(request, 'LibraryApp/Login_Successful.html', {'account-type': Accounts.accType})
-
-
-def librarian(request):
-    return render(request, 'LibraryApp/librarian.html')
+def login_successful(request, context):
+    return render(request, 'LibraryApp/Login_Successful.html', {'context': context})
 
 
-def user(request):
+def librarian(request, account_id):
     books = Book.objects.all()
+    account = Accounts.objects.get(id=account_id)
 
-    return render(request, 'LibraryApp/user.html', {'book_list': books})
+    return render(request, 'LibraryApp/librarian.html', {'book_list': books, 'account': account})
+
+
+def user(request, account_id):
+    books = Book.objects.all()
+    account = Accounts.objects.get(id=account_id)
+
+    return render(request, 'LibraryApp/user.html', {'book_list': books,'account': account})
 
 
 def feedback(request):

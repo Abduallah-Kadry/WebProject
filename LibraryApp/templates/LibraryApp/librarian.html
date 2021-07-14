@@ -1,11 +1,11 @@
 {% extends 'LibraryApp/base.html' %}
-{%  block  body %}
-     <div class="username">
-        <!-- this is test for vcs -->
+{% block  body %}
+    <div class="username">
+        {{ account.name }} as a {{ account.accType }}
     </div>
-     <div class="bookList">
+    <div class="bookList">
         {% for book in book_list %}
-            <a href="#">{{ book.name }}</a><br>
+            <a href="{% url 'bookDetails' book.id %}">{{ book.name }}{{ book.name }}</a><br>
         {% endfor %}
     </div>
 {% endblock %}
