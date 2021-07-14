@@ -15,20 +15,20 @@ def register(request):
     if request.method == 'POST':
 
         name = request.POST.get('name')
+
         email = request.POST.get('email')
         try:
             Accounts.objects.get(email=email)
-        except Accounts.MultipleObjectsReturned:
-            return redirect('register')
+            return redirect('error_email_already_exist')  # already exist error for email register
         except Accounts.DoesNotExist:
             pass
 
         password = request.POST.get('password1')
+
         phone = request.POST.get('phone')
         try:
             Accounts.objects.get(phone=phone)
-        except Accounts.MultipleObjectsReturned:
-            return redirect('register')
+            return redirect('error_phone_already_exist')  # already exist error for phone register
         except Accounts.DoesNotExist:
             pass
 
@@ -46,22 +46,31 @@ def register(request):
 def login(request):
     if request.method == 'POST':
         try:
-            account = Accounts.objects.get(password='123456789')
-            return redirect('user')
+            account_email = Accounts.objects.get(email=request.POST.get('email'))
         except Accounts.DoesNotExist:
-            return redirect('error')
+            return redirect('error_email_does_not_exist')  # email doesn't exist error for login
+        try:
+            account_password = Accounts.objects.get(password=request.POST.get('password'))
+        except Accounts.DoesNotExist:
+            return redirect('error_wrong_password')  # wrong password error for login
         except Accounts.MultipleObjectsReturned:
-            return redirect('librarian')
+            pass
 
-    return render(request, 'LibraryApp/login.html')
+        if account_email.accType == 'librarian':
+            return redirect('librarian')
+        else:
+            return redirect('user')
+
+    return render(request, 'LibraryApp/login.html', {'account-type': Accounts.accType})
+
+
+def login_successful(request):
+
+    return render(request, 'LibraryApp/Login_Successful.html', {'account-type': Accounts.accType})
 
 
 def librarian(request):
     return render(request, 'LibraryApp/librarian.html')
-
-
-def error(request):
-    return render(request, 'LibraryApp/error.html')
 
 
 def user(request):
@@ -106,3 +115,25 @@ def book_edit(request, book_id):
 def book_borrow(request, book_id):
     book = Book.objects.get(id=book_id)
     return render(request, 'LibraryApp/borrow.html', {'book': book})
+
+
+def error_email_already_exist(request):
+    return render(request, 'LibraryApp/errorEmailAlreadyExist.html')
+
+
+def error_email_does_not_exist(request):
+    return render(request, 'LibraryApp/error_email_does_not_exist.html')
+
+
+def error_wrong_password(request):
+    return render(request, 'LibraryApp/error_wrong_password.html')
+
+
+def error_phone_already_exist(request):
+    return render(request, 'LibraryApp/errorPhoneAlreadyExist.html')
+
+
+"""
+
+
+"""

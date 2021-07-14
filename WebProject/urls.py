@@ -32,7 +32,12 @@ urlpatterns = [
     path('delete/<int:book_id>',views.book_delete,name='deleteBook' ),
     path('edit/<int:book_id>',views.book_edit,name='editBook' ),
     path('borrow/<int:book_id>',views.book_borrow,name='borrowBook' ),
-    path('error/',views.error,name='error' ),
+    path('login_successful/',views.login_successful,name='login_successful' ),
+
+    path('errorEmailAlreadyExist/',views.error_email_already_exist,name='error_email_already_exist' ),
+    path('errorEmailDoesnotExist/',views.error_email_does_not_exist,name='error_email_does_not_exist' ),
+    path('errorWrongPassword/',views.error_wrong_password,name='error_wrong_password' ),
+    path('errorPhoneAlreadyExist/',views.error_phone_already_exist,name='error_phone_already_exist' ),
 
 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

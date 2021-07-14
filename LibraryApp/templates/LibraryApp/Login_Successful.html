@@ -1,0 +1,9 @@
+{% extends 'LibraryApp/base.html' %}
+{% block  body %}
+    <h3>Login Successful</h3>
+
+    <div class="buttonDiv">
+        <input type="button" value="Back to home page as " onclick="location.href='{% url 'home' %}'">
+    </div>
+
+{% endblock %}
