@@ -14,16 +14,16 @@
 
         <div>
             <label>Password</label>
-            <input type="password" name="password1" id="password1" required><br>
+            <input type="password" name="password1" id="password1" onkeyup='check();' required><br>
         </div>
         <div>
             <label>Password(again)</label>
-            <input type="password" name="password2" id="password2" required ><br>
+            <input type="password" name="password2" id="password2" onkeyup='check();' required><br>
         </div>
-
+        <span id='message'></span>
         <div>
             <label>Phone</label>
-            <input type="number" name="phone" id="phone" ><br>
+            <input type="number" name="phone" id="phone"><br>
         </div>
 
         <div>
@@ -39,5 +39,21 @@
 
 
     </form>
+    <script>
+        var check = function () {
+            var con1 = document.getElementById('password1').value;
+            var con2 = document.getElementById('password2').value;
+            var con3 = document.getElementById('message').value;
 
+            if (con1 == con2 && con1 != '' && con2 !='') {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'Matching';
+            } else if (con1 !== con2) {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'Not matching';
+            } else if (con1 == "" || con2 == "") {
+                document.getElementById('message').innerHTML = '';
+            }
+        }
+    </script>
 {% endblock %}
