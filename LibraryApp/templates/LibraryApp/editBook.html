@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'LibraryApp/base.html' %}
+{% block  body %}
 
-</body>
-</html>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 style="text-align: left">Edit Book: {{ book.name }}</h3><br>
+
+        <div>
+            <label>name</label>
+            <input type="text" name='name'><br>
+        </div>
+        <div>
+            <label>Description</label>
+            <input type="text" name="Description"><br>
+        </div>
+        <div>
+            <label>ISBN</label>
+            <input type="text" name="ISBN"><br>
+        </div>
+        <div>
+            <label>Author</label>
+            <input type="text" name="author"><br>
+        </div>
+        <div>
+            <label>Publication Year</label>
+            <input type="text" name="publication_year"><br>
+        </div>
+
+
+        <div class="buttonDiv">
+            <input type="submit" value="Update book" onclick="location.href='{% url 'librarian' account.id %}">
+            <input type="button" value="Back" onclick="location.href='{% url 'bookDetails' book.id account.id %}'">
+        </div>
+
+
+    </form>
+
+{% endblock %}

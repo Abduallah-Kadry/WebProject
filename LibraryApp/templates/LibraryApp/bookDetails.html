@@ -1,7 +1,7 @@
 {% extends 'LibraryApp/base.html' %}
 {% block  body %}
-    <div>
-        <h1>{{ book.name }} Full Details</h1>
+    <div class="bookList">
+        <h3>{{ book.name }} Full Details</h3>
         <p>Name: {{ book.name }}</p>
         <p>BookId: {{ book.id }}</p>
         <p>Description: {{ book.description }}</p>
@@ -10,9 +10,18 @@
         <p>Publication Year: {{ book.publication_year }}</p>
     </div>
     <div class="buttonDiv">
-        <input type="button" value="Edit Book" onclick="location.href='{% url 'editBook' book.id %}'">
-        <input type="button" value="Delete Book" onclick="location.href='{% url 'deleteBook' book.id %}'">
-        <input type="button" value="Borrow Book" onclick="location.href='{% url 'borrowBook' book.id %}'">
+        {% if account.accType == 'User' %}
+            <input type="button" value="Borrow Book"
+                   onclick="location.href='{% url 'borrowBook' book.id account.id %}'">
+            <input type="button" value="Back" onclick="location.href='{% url 'user' account.id %}'">
+        {% endif %}
+        {% if account.accType == 'Librarian' %}
+            <input type="button" value="Edit Book" onclick="location.href='{% url 'editBook' book.id account.id %}'">
+            <input type="button" value="Delete Book"
+                   onclick="location.href='{% url 'deleteBook' book.id account.id %}'">
+            <input type="button" value="Back" onclick="location.href='{% url 'librarian'  account.id %}'">
+        {% endif %}
+
 
     </div>
 

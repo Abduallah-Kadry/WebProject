@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'LibraryApp/base.html' %}
+{% block  body %}
 
-</body>
-</html>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        Are you sure you want to delete?
+
+        <div class="buttonDiv">
+            <input type="submit" value="delete book">
+            <input type="button" value="Back" onclick="location.href='{% url 'bookDetails' book.id account.id %}'">
+        </div>
+
+
+    </form>
+
+{% endblock %}
+{% csrf_token %}

@@ -76,7 +76,7 @@ def user(request, account_id):
     books = Book.objects.all()
     account = Accounts.objects.get(id=account_id)
 
-    return render(request, 'LibraryApp/user.html', {'book_list': books,'account': account})
+    return render(request, 'LibraryApp/user.html', {'book_list': books, 'account': account})
 
 
 def feedback(request):
@@ -97,24 +97,39 @@ def add_book(request):
     return render(request, 'LibraryApp/addBook.html')
 
 
-def book_details(request, book_id):
+def book_details(request, book_id, account_id):
     book = Book.objects.get(id=book_id)
-    return render(request, 'LibraryApp/bookDetails.html', {'book': book})
+    account = Accounts.objects.get(id=account_id)
+    return render(request, 'LibraryApp/bookDetails.html', {'book': book, 'account': account})
 
 
-def book_delete(request, book_id):
+def book_delete(request, book_id, account_id):
     book = Book.objects.get(id=book_id)
-    return render(request, 'LibraryApp/delete.html', {'book': book})
+    account = Accounts.objects.get(id=account_id)
+    if request.method == 'POST':
+        book.delete()
+
+    return render(request, 'LibraryApp/delete.html', {'book': book, 'account': account})
 
 
-def book_edit(request, book_id):
+def book_edit(request, book_id, account_id):
     book = Book.objects.get(id=book_id)
-    return render(request, 'LibraryApp/editBook.html', {'book': book})
+    account = Accounts.objects.get(id=account_id)
+    if request.method == 'POST':
+        book.name = request.POST.get('name')
+        book.description = request.POST.get('Description')
+        book.ISBN = request.POST.get('ISBN')
+        book.author = request.POST.get('author')
+        book.publication_year = request.POST.get('publication_year')
+        book.save()
+
+    return render(request, 'LibraryApp/editBook.html', {'book': book, 'account': account})
 
 
-def book_borrow(request, book_id):
+def book_borrow(request, book_id, account_id):
+    account = Accounts.objects.get(id=account_id)
     book = Book.objects.get(id=book_id)
-    return render(request, 'LibraryApp/borrow.html', {'book': book})
+    return render(request, 'LibraryApp/borrow.html', {'book': book, 'account': account})
 
 
 def error_email_already_exist(request):
