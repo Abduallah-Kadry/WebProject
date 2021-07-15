@@ -28,13 +28,15 @@ urlpatterns = [
     path('librarian/<int:account_id>',views.librarian,name='librarian' ),
     path('feedback/',views.feedback,name='feedback' ),
 
-    path('addBook/',views.add_book,name='addBook' ),
+    path('addBook/<int:account_id>',views.add_book,name='addBook' ),
     path('bookDetails/<int:book_id>/<int:account_id>',views.book_details,name='bookDetails' ),
     path('delete/<int:book_id>/<int:account_id>',views.book_delete,name='deleteBook' ),
     path('edit/<int:book_id>/<int:account_id>',views.book_edit,name='editBook' ),
     path('borrow/<int:book_id>/<int:account_id>',views.book_borrow,name='borrowBook' ),
 
     path('login_successful/',views.login_successful,name='login_successful' ),
+    path('register_successful/',views.register_successful,name='register_successful' ),
+    path('add_book_successful/<int:account_id>',views.add_book_successful,name='add_book_successful' ),
 
     path('errorEmailAlreadyExist/',views.error_email_already_exist,name='error_email_already_exist' ),
     path('errorEmailDoesnotExist/',views.error_email_does_not_exist,name='error_email_does_not_exist' ),

@@ -8,4 +8,8 @@
             <a href="{% url 'bookDetails' book.id account.id %}">{{ book.name }}</a><br>
         {% endfor %}
     </div>
+    <div class="buttonDiv">
+        <input type="button" value="addBook" onclick="location.href='{% url 'addBook' account.id %}'">
+    </div>
+
 {% endblock %}

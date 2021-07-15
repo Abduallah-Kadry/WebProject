@@ -7,32 +7,34 @@
 
         <div>
             <label>name</label>
-            <input type="text" name='name'><br>
+            <input type="text" name="name" required><br>
         </div>
         <div>
             <label>Description</label>
-            <input type="text" name="Description"><br>
+            <input type="text" name="Description" required><br>
         </div>
         <div>
             <label>ISBN</label>
-            <input type="text" name="ISBN"><br>
+            <input type="text" name="ISBN" required><br>
         </div>
         <div>
             <label>Author</label>
-            <input type="text" name="author"><br>
+            <input type="text" name="author" required><br>
         </div>
         <div>
             <label>Publication Year</label>
-            <input type="text" name="publication_year"><br>
+            <input type="number" name="publication_year"><br>
         </div>
 
 
         <div class="buttonDiv">
             <input type="submit" value="Add book">
-            <input type="button" value="Back" onclick="location.href='{% url 'home' %}'">
+            <input type="button" value="Back" onclick="location.href='{% url 'librarian' account.id %}'">
         </div>
 
 
     </form>
 
 {% endblock %}
+
+<!--onclick="location.href='{% url 'add_book_successful' account.id %}'"-->

@@ -39,6 +39,7 @@ def register(request):
 
         account = Accounts(name=name, email=email, password=password, accType=acctype, phone=phone)
         account.save()
+        return redirect('register_successful')
 
     return render(request, 'LibraryApp/registration.html')
 
@@ -61,10 +62,6 @@ def login(request):
     return render(request, 'LibraryApp/login.html')
 
 
-def login_successful(request, context):
-    return render(request, 'LibraryApp/Login_Successful.html', {'context': context})
-
-
 def librarian(request, account_id):
     books = Book.objects.all()
     account = Accounts.objects.get(id=account_id)
@@ -83,7 +80,8 @@ def feedback(request):
     return render(request, 'LibraryApp/feedback.html')
 
 
-def add_book(request):
+def add_book(request, account_id):
+    account = Accounts.objects.get(id=account_id)
     if request.method == 'POST':
         name = request.POST.get('name')
         description = request.POST.get('Description')
@@ -91,10 +89,11 @@ def add_book(request):
         author = request.POST.get('author')
         publication_year = request.POST.get('publication_year')
 
-        book = Book(name=name, desc=description, ISBN=ISBN, author=author, publication_year=publication_year)
+        book = Book(name=name, description=description, ISBN=ISBN, author=author, publication_year=publication_year)
         book.save()
+        return redirect('add_book_successful', account_id)
 
-    return render(request, 'LibraryApp/addBook.html')
+    return render(request, 'LibraryApp/addBook.html', {'account': account})
 
 
 def book_details(request, book_id, account_id):
@@ -130,6 +129,19 @@ def book_borrow(request, book_id, account_id):
     account = Accounts.objects.get(id=account_id)
     book = Book.objects.get(id=book_id)
     return render(request, 'LibraryApp/borrow.html', {'book': book, 'account': account})
+
+
+def register_successful(request):
+    return render(request, 'LibraryApp/register_successful.html')
+
+
+def login_successful(request, context):
+    return render(request, 'LibraryApp/Login_Successful.html', {'context': context})
+
+
+def add_book_successful(request, account_id):
+    account = Accounts.objects.get(id=account_id)
+    return render(request, 'LibraryApp/bookAdd_Successful.html', {'account': account})
 
 
 def error_email_already_exist(request):

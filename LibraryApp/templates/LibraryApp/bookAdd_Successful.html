@@ -1,0 +1,14 @@
+{% extends 'LibraryApp/base.html' %}
+{% block  body %}
+    <h3>Book Added Successfully</h3>
+
+    <div class="buttonDiv">
+        <input type="button" value="Add new book "
+               onclick="location.href='{% url 'addBook' account.id %}'">
+        <input type="button" value="Go to {{ account.accType }} page "
+               onclick="location.href='{% url 'librarian' account.id %}'">
+
+
+    </div>
+
+{% endblock %}
