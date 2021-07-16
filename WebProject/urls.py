@@ -37,6 +37,9 @@ urlpatterns = [
     path('login_successful/',views.login_successful,name='login_successful' ),
     path('register_successful/',views.register_successful,name='register_successful' ),
     path('add_book_successful/<int:account_id>',views.add_book_successful,name='add_book_successful' ),
+    path('borrow_successful/<int:account_id>',views.borrow_successful,name='borrow_successful' ),
+    path('cancelBorrow/<int:book_id>/<int:account_id>',views.cancel_borrow,name='cancelBorrow' ),
+
 
     path('errorEmailAlreadyExist/',views.error_email_already_exist,name='error_email_already_exist' ),
     path('errorEmailDoesnotExist/',views.error_email_does_not_exist,name='error_email_does_not_exist' ),

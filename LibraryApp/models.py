@@ -21,4 +21,5 @@ class Book(models.Model):
     description = models.CharField(max_length=300)
     ISBN = models.CharField(max_length=20)
     author = models.CharField(max_length=100)
-    publication_year = models.IntegerField(max_length=4)
+    borrow_user = models.CharField(max_length=300, null=True)
+    publication_year = models.IntegerField(null=True)

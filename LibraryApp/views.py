@@ -107,6 +107,7 @@ def book_delete(request, book_id, account_id):
     account = Accounts.objects.get(id=account_id)
     if request.method == 'POST':
         book.delete()
+        return redirect('librarian', account_id)
 
     return render(request, 'LibraryApp/delete.html', {'book': book, 'account': account})
 
@@ -128,7 +129,27 @@ def book_edit(request, book_id, account_id):
 def book_borrow(request, book_id, account_id):
     account = Accounts.objects.get(id=account_id)
     book = Book.objects.get(id=book_id)
+    if request.method == 'POST':
+        book.borrow_user = "borrowed to user no." + str(account_id)
+        book.save()
+        return redirect('borrow_successful', account_id)
+
     return render(request, 'LibraryApp/borrow.html', {'book': book, 'account': account})
+
+
+def cancel_borrow(request, book_id, account_id):
+    account = Accounts.objects.get(id=account_id)
+    book = Book.objects.get(id=book_id)
+    if request.method == 'POST':
+        book.borrow_user = None
+        book.save()
+        return redirect('bookDetails', book_id, account_id)
+    return render(request, 'LibraryApp/cancel_borrow.html', {'account': account, 'book': book})
+
+
+def borrow_successful(request, account_id):
+    account = Accounts.objects.get(id=account_id)
+    return render(request, 'LibraryApp/borrow_successful.html', {'account': account})
 
 
 def register_successful(request):
@@ -158,9 +179,3 @@ def error_wrong_password(request):
 
 def error_phone_already_exist(request):
     return render(request, 'LibraryApp/errorPhoneAlreadyExist.html')
-
-
-"""
-
-
-"""
