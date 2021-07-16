@@ -122,6 +122,7 @@ def book_edit(request, book_id, account_id):
         book.author = request.POST.get('author')
         book.publication_year = request.POST.get('publication_year')
         book.save()
+        return redirect('edit_book_successful', account_id)
 
     return render(request, 'LibraryApp/editBook.html', {'book': book, 'account': account})
 
@@ -163,6 +164,11 @@ def login_successful(request, context):
 def add_book_successful(request, account_id):
     account = Accounts.objects.get(id=account_id)
     return render(request, 'LibraryApp/bookAdd_Successful.html', {'account': account})
+
+
+def edit_book_successful(request, account_id):
+    account = Accounts.objects.get(id=account_id)
+    return render(request, 'LibraryApp/edit_book_successful.html', {'account': account})
 
 
 def error_email_already_exist(request):

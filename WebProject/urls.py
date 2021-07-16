@@ -38,6 +38,7 @@ urlpatterns = [
     path('register_successful/',views.register_successful,name='register_successful' ),
     path('add_book_successful/<int:account_id>',views.add_book_successful,name='add_book_successful' ),
     path('borrow_successful/<int:account_id>',views.borrow_successful,name='borrow_successful' ),
+    path('edit_book_successful/<int:account_id>',views.edit_book_successful,name='edit_book_successful' ),
     path('cancelBorrow/<int:book_id>/<int:account_id>',views.cancel_borrow,name='cancelBorrow' ),
 
 
