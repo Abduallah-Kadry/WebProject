@@ -1,0 +1,13 @@
+{% extends 'LibraryApp/base.html' %}
+{% block  body %}
+    <div class="bookList">
+        {% for book in book_list %}
+            <a href="{% url 'bookDetails' book.id account.id %}">{{ book.name }}</a><br>
+        {% endfor %}
+    </div>
+    <div class="buttonDiv">
+        <input type="button" value="addBook" onclick="location.href='{% url 'addBook' account.id %}'">
+        <input type="button" value="Logout" onclick="location.href='{% url 'login' %}'">
+    </div>
+
+{% endblock %}

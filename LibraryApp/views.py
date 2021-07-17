@@ -103,7 +103,7 @@ def book_delete(request, book_id, account_id):
     account = Accounts.objects.get(id=account_id)
     if request.method == 'POST':
         book.delete()
-        return redirect('admin', account_id)
+        return redirect('Admin', account_id)
 
     return render(request, 'LibraryApp/delete.html', {'book': book, 'account': account})
 
