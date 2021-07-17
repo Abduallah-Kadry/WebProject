@@ -1,5 +1,3 @@
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
 from .models import *
@@ -32,10 +30,10 @@ def register(request):
         except Accounts.DoesNotExist:
             pass
 
-        if request.POST.get('radbtn') == 'userRadio':
-            acctype = 'User'
+        if request.POST.get('radbtn') == 'studentRadio':
+            acctype = 'student'
         else:
-            acctype = 'Librarian'
+            acctype = 'admin'
 
         account = Accounts(name=name, email=email, password=password, accType=acctype, phone=phone)
         account.save()
@@ -62,18 +60,16 @@ def login(request):
     return render(request, 'LibraryApp/login.html')
 
 
-def librarian(request, account_id):
+def Admin(request, account_id):
     books = Book.objects.all()
     account = Accounts.objects.get(id=account_id)
+    return render(request, 'LibraryApp/admin.html', {'book_list': books, 'account': account})
 
-    return render(request, 'LibraryApp/librarian.html', {'book_list': books, 'account': account})
 
-
-def user(request, account_id):
+def student(request, account_id):
     books = Book.objects.all()
     account = Accounts.objects.get(id=account_id)
-
-    return render(request, 'LibraryApp/user.html', {'book_list': books, 'account': account})
+    return render(request, 'LibraryApp/student.html', {'book_list': books, 'account': account})
 
 
 def feedback(request):
@@ -107,7 +103,7 @@ def book_delete(request, book_id, account_id):
     account = Accounts.objects.get(id=account_id)
     if request.method == 'POST':
         book.delete()
-        return redirect('librarian', account_id)
+        return redirect('admin', account_id)
 
     return render(request, 'LibraryApp/delete.html', {'book': book, 'account': account})
 
@@ -157,8 +153,8 @@ def register_successful(request):
     return render(request, 'LibraryApp/register_successful.html')
 
 
-def login_successful(request, context):
-    return render(request, 'LibraryApp/Login_Successful.html', {'context': context})
+def login_successful(request, account):
+    return render(request, 'LibraryApp/Login_Successful.html', {'account': account})
 
 
 def add_book_successful(request, account_id):

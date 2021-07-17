@@ -11,14 +11,14 @@
         <p>Borrowed by: {{ book.borrow_user }}</p>
     </div>
     <div class="buttonDiv">
-        {% if account.accType == 'User' %}
+        {% if account.accType == 'student' %}
             {% if book.borrow_user == None %}
                 <input type="button" value="Borrow Book"
                        onclick="location.href='{% url 'borrowBook' book.id account.id %}'">
             {% endif %}
-            <input type="button" value="Back" onclick="location.href='{% url 'user' account.id %}'">
+            <input type="button" value="Back" onclick="location.href='{% url 'student' account.id %}'">
         {% endif %}
-        {% if account.accType == 'Librarian' %}
+        {% if account.accType == 'admin' %}
             <input type="button" value="Edit Book" onclick="location.href='{% url 'editBook' book.id account.id %}'">
             <input type="button" value="Delete Book"
                    onclick="location.href='{% url 'deleteBook' book.id account.id %}'">
@@ -26,7 +26,7 @@
                 <input type="button" value="Cancel Borrow"
                        onclick="location.href='{% url 'cancelBorrow' book.id account.id %}'">
             {% endif %}
-            <input type="button" value="Back" onclick="location.href='{% url 'librarian'  account.id %}'">
+            <input type="button" value="Back" onclick="location.href='{% url 'Admin'  account.id %}'">
         {% endif %}
 
 

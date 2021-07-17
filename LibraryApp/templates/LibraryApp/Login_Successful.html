@@ -3,12 +3,12 @@
     <h3>Login Successful</h3>
 
     <div class="buttonDiv">
-        {% if context.accType == 'Librarian' %}
-            <input type="button" value="Go to {{ context.accType }} page "
-                   onclick="location.href='{% url 'librarian' context.id %}'">
+        {% if account.accType == 'admin' %}
+            <input type="button" value="Go to {{ account.accType }} page "
+                   onclick="location.href='{% url 'Admin' account.id %}'">
         {% else %}
-            <input type="button" value="Go to {{ context.accType }} page "
-                   onclick="location.href='{% url 'user' context.id %}'">
+            <input type="button" value="Go to {{ account.accType }} page "
+                   onclick="location.href='{% url 'student' account.id %}'">
         {% endif %}
 
     </div>

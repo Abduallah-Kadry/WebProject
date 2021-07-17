@@ -28,9 +28,8 @@
 
         <div>
             <label>Sign up as:</label>
-            <input type="radio" value="userRadio" name="radbtn" required> user<br>
-            <input type="radio" value="librarianRadio" name="radbtn" required> Librarian<br>
-
+            <input type="radio" value="adminRadio" name="radbtn" required> Admin<br>
+            <input type="radio" value="studentRadio" name="radbtn" required> Student<br>
         </div>
         <div class="buttonDiv">
             <input type="submit">
@@ -45,7 +44,7 @@
             var con2 = document.getElementById('password2').value;
             var con3 = document.getElementById('message').value;
 
-            if (con1 == con2 && con1 != '' && con2 !='') {
+            if (con1 == con2 && con1 != '' && con2 != '') {
                 document.getElementById('message').style.color = 'green';
                 document.getElementById('message').innerHTML = 'Matching';
             } else if (con1 !== con2) {

@@ -24,8 +24,8 @@ urlpatterns = [
     path('',views.home,name='home' ),
     path('register/',views.register,name='register' ),
     path('login/',views.login,name='login' ),
-    path('user/<int:account_id>',views.user,name='user' ),
-    path('librarian/<int:account_id>',views.librarian,name='librarian' ),
+    path('student/<int:account_id>',views.student,name='student' ),
+    path('Admin/<int:account_id>',views.Admin,name='Admin' ),
     path('feedback/',views.feedback,name='feedback' ),
 
     path('addBook/<int:account_id>',views.add_book,name='addBook' ),
