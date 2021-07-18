@@ -1,0 +1,15 @@
+{% extends 'LibraryApp/base.html' %}
+{% block  body %}
+    <div class="bookList">
+        <h3>{{ borrower.userName }} Full Details</h3>
+        <p>Borrower Name: {{ borrower.userName }}</p>
+        <p>Book Name: {{ borrower.borrowedBook }}</p>
+        <p>Period: {{ borrower.period }}</p>
+
+    </div>
+    <div class="buttonDiv">
+        <input type="button" value="Borrow Book"
+               onclick="location.href='{% url 'borrowBook' book.id account.id %}'">
+    </div>
+
+{% endblock %}

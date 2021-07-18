@@ -23,3 +23,13 @@ class Book(models.Model):
     author = models.CharField(max_length=100)
     borrow_user = models.CharField(max_length=300, null=True)
     publication_year = models.IntegerField(null=True)
+
+
+class BorrowList(models.Model):
+
+    def __str__(self):
+        return self.userName
+
+    userName = models.CharField(max_length=100)
+    borrowedBook = models.CharField(max_length=100)
+    period = models.IntegerField()

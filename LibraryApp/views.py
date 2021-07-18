@@ -72,6 +72,16 @@ def student(request, account_id):
     return render(request, 'LibraryApp/student.html', {'book_list': books, 'account': account})
 
 
+def borrow_book_list(request):
+    borrow_list = BorrowList.objects.all()
+    return render(request, 'LibraryApp/Borrow_List.html', {'borrow_list': borrow_list})
+
+
+def borrow_detail(request, borrow_id):
+    borrower = BorrowList.objects.get(id=borrow_id)
+    return render(request, 'LibraryApp/Borrow_detail.html', {'borrower': borrower})
+
+
 def feedback(request):
     return render(request, 'LibraryApp/feedback.html')
 

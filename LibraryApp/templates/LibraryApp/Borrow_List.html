@@ -1,8 +1,8 @@
 {% extends 'LibraryApp/base.html' %}
 {% block  body %}
     <div class="bookList">
-        {% for book in book_list %}
-            <a href="{% url 'bookDetails' book.id account.id %}">{{ book.name }}</a><br>
+        {% for borrower  in borrow_list %}
+            <a href="{% url 'bookDetails' borrower.id account.id %}">{{ book.name }}</a><br>
         {% endfor %}
     </div>
     <div class="buttonDiv">
