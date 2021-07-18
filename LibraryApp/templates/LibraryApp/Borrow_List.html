@@ -2,12 +2,9 @@
 {% block  body %}
     <div class="bookList">
         {% for borrower  in borrow_list %}
-            <a href="{% url 'bookDetails' borrower.id account.id %}">{{ book.name }}</a><br>
+            <a href="{% url 'borrow_detail' borrower.id%}">{{ borrower.userName }}</a><br>
         {% endfor %}
     </div>
-    <div class="buttonDiv">
-        <input type="button" value="addBook" onclick="location.href='{% url 'addBook' account.id %}'">
-        <input type="button" value="Logout" onclick="location.href='{% url 'login' %}'">
-    </div>
+
 
 {% endblock %}

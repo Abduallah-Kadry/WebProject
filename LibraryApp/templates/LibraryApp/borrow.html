@@ -4,13 +4,16 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        Are you sure you want to borrow this book?
+        <p> How long do you request to borrow this book ?</p>
+        <div>
+             <input type="number" name="period" required min="0" max ="10" >  <span>days</span>
+        </div>
 
         <div class="buttonDiv">
             <input type="submit" value="Borrow Book">
+            <!-- do something here about back button-->
             <input type="button" value="Back" onclick="location.href='{% url 'bookDetails' book.id account.id %}'">
         </div>
-
 
     </form>
 

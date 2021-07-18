@@ -13,7 +13,7 @@
     <div class="buttonDiv">
         {% if account.accType == 'student' %}
             {% if book.borrow_user == None %}
-                <input type="button" value="Borrow Book"
+                <input type="button" value="Request Borrow Book"
                        onclick="location.href='{% url 'borrowBook' book.id account.id %}'">
             {% endif %}
             <input type="button" value="Back" onclick="location.href='{% url 'student' account.id %}'">

@@ -72,20 +72,6 @@ def student(request, account_id):
     return render(request, 'LibraryApp/student.html', {'book_list': books, 'account': account})
 
 
-def borrow_book_list(request):
-    borrow_list = BorrowList.objects.all()
-    return render(request, 'LibraryApp/Borrow_List.html', {'borrow_list': borrow_list})
-
-
-def borrow_detail(request, borrow_id):
-    borrower = BorrowList.objects.get(id=borrow_id)
-    return render(request, 'LibraryApp/Borrow_detail.html', {'borrower': borrower})
-
-
-def feedback(request):
-    return render(request, 'LibraryApp/feedback.html')
-
-
 def add_book(request, account_id):
     account = Accounts.objects.get(id=account_id)
     if request.method == 'POST':
@@ -133,13 +119,26 @@ def book_edit(request, book_id, account_id):
     return render(request, 'LibraryApp/editBook.html', {'book': book, 'account': account})
 
 
+def borrow_book_list(request):
+    borrow_list = BorrowList.objects.all()
+    return render(request, 'LibraryApp/Borrow_List.html', {'borrow_list': borrow_list})
+
+
+def borrow_detail(request, borrow_id):
+    borrower = BorrowList.objects.get(id=borrow_id)
+    return render(request, 'LibraryApp/Borrow_detail.html', {'borrower': borrower})
+
+
 def book_borrow(request, book_id, account_id):
     account = Accounts.objects.get(id=account_id)
     book = Book.objects.get(id=book_id)
+
     if request.method == 'POST':
-        book.borrow_user = "borrowed to user no." + str(account_id)
-        book.save()
-        return redirect('borrow_successful', account_id)
+        period = request.POST.get('period')
+        borrow_list = BorrowList(userName=account.name, borrowedBook=book.name, period=period)
+        borrow_list.save()
+
+        return redirect('borrow_request_successful', account_id)
 
     return render(request, 'LibraryApp/borrow.html', {'book': book, 'account': account})
 
@@ -154,9 +153,13 @@ def cancel_borrow(request, book_id, account_id):
     return render(request, 'LibraryApp/cancel_borrow.html', {'account': account, 'book': book})
 
 
-def borrow_successful(request, account_id):
+def feedback(request):
+    return render(request, 'LibraryApp/feedback.html')
+
+
+def borrow_request_successful(request, account_id):
     account = Accounts.objects.get(id=account_id)
-    return render(request, 'LibraryApp/borrow_successful.html', {'account': account})
+    return render(request, 'LibraryApp/borrow_request_successful.html', {'account': account})
 
 
 def register_successful(request):

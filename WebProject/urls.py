@@ -33,11 +33,13 @@ urlpatterns = [
     path('delete/<int:book_id>/<int:account_id>',views.book_delete,name='deleteBook' ),
     path('edit/<int:book_id>/<int:account_id>',views.book_edit,name='editBook' ),
     path('borrow/<int:book_id>/<int:account_id>',views.book_borrow,name='borrowBook' ),
+    path('borrow_list/',views.borrow_book_list,name='borrow_list' ),
+    path('borrow_detail/<int:borrow_id>',views.borrow_detail,name='borrow_detail' ),
 
     path('login_successful/',views.login_successful,name='login_successful' ),
     path('register_successful/',views.register_successful,name='register_successful' ),
     path('add_book_successful/<int:account_id>',views.add_book_successful,name='add_book_successful' ),
-    path('borrow_successful/<int:account_id>',views.borrow_successful,name='borrow_successful' ),
+    path('borrow_request_successful/<int:account_id>',views.borrow_request_successful,name='borrow_request_successful' ),
     path('edit_book_successful/<int:account_id>',views.edit_book_successful,name='edit_book_successful' ),
     path('cancelBorrow/<int:book_id>/<int:account_id>',views.cancel_borrow,name='cancelBorrow' ),
 

@@ -9,7 +9,9 @@
         {% endfor %}
     </div>
     <div class="buttonDiv">
-        <input type="button" value="addBook" onclick="location.href='{% url 'addBook' account.id %}'">
+        <input type="button" value="Add Book" onclick="location.href='{% url 'addBook' account.id %}'">
+        <input type="button" value="View Borrow Requests" onclick="location.href='{% url 'borrow_list' %}'">
+
         <input type="button" value="Logout" onclick="location.href='{% url 'login' %}'">
     </div>
 
