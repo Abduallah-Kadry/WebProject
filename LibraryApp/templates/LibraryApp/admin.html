@@ -4,8 +4,30 @@
         {{ account.name }} as a {{ account.accType }}
     </div>
     <div class="bookList">
+        <div>
+
+            <label style="width: 400px;display: inline;float: left">
+
+                <span>Book name</span>
+            </label>
+            <label style="width: 400px;display: inline;float: left">
+
+                <span>Statue</span>
+            </label>
+        </div>
+    <br>
+    <hr style="border-style: solid">
         {% for book in book_list %}
-            <a href="{% url 'bookDetails' book.id account.id %}">{{ book.name }}</a><br>
+            <div>
+                <label style="width: 400px;display: inline;float: left">
+                    <a href="{% url 'bookDetails' book.id account.id %}" style="display: inline;">{{ book.name }}</a>
+                </label>
+            </div>
+            {% if book.borrow_user == None %}
+                <p style="color:lightgreen; display: inline"> Available</p><br>
+            {% else %}
+                <p style="color:darkred;display: inline"> Not Available</p><br>
+            {% endif %}
         {% endfor %}
     </div>
     <div class="buttonDiv">

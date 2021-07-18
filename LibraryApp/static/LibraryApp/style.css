@@ -132,11 +132,23 @@ textarea {
     width: 1000px;
     color: white;
 }
-.bookList p{
-    color: white;
 
-    font:normal normal 20px Tahoma;
+.bookList p {
+    color: white;
+    font: normal normal 20px Tahoma;
 }
+
+.bookList a {
+    text-decoration: none;
+    font: normal normal 20px Tahoma;
+    color: #faa702;
+    transition: .4s color, background-color;;
+}
+
+.bookList a:hover {
+    color: white;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;

@@ -6,9 +6,13 @@
     </div>
     <div class="bookList">
         {% for book in book_list %}
-            {{ book.id }} <a href="{% url 'bookDetails' book.id account.id %}">{{ book.name }}</a><br>
+            <a href="{% url 'bookDetails' book.id account.id %}" style="display: inline">{{ book.name }}</a><br>
+            {% if book.borrow_user == None %}
+                <span style="color:lightgreen;"> Available</span>
+            {% else %}
+                <span style="color:darkred;"> Not Available</span>
+            {% endif %}
         {% endfor %}
-
     </div>
     <div class="buttonDiv">
         <input type="button" value="Logout" onclick="location.href='{% url 'login' %}'">

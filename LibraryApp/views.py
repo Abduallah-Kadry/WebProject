@@ -140,20 +140,30 @@ def book_borrow(request, book_id, account_id):
 
     if request.method == 'POST':
         period = request.POST.get('period')
-        borrow_list = BorrowList(userName=account.name, borrowedBook=book.name, period=period,borrowedBookID=book.id)
+        borrow_list = BorrowList(userName=account.name, borrowedBook=book.name, period=period, borrowedBookID=book.id,
+                                 borrowerID=account_id)
         borrow_list.save()
         return redirect('borrow_request_successful', account_id)
     return render(request, 'LibraryApp/borrow.html', {'book': book, 'account': account})
 
 
-def cancel_borrow(request, book_id, account_id):
-    account = Accounts.objects.get(id=account_id)
-    book = Book.objects.get(id=book_id)
-    if request.method == 'POST':
-        book.borrow_user = None
-        book.save()
-        return redirect('bookDetails', book_id, account_id)
-    return render(request, 'LibraryApp/cancel_borrow.html', {'account': account, 'book': book})
+def borrow_request_accepted(request, borrower_id):
+    borrower = BorrowList.objects.get(id=borrower_id)
+    book = Book.objects.get(id=borrower.borrowedBookID)
+    book.borrow_user = borrower.userName
+    book.save()
+    borrower.delete()
+    return render(request, 'LibraryApp/borrow_request_accepted.html', {'borrow': borrower})
+
+
+def borrow_request_refused(request, borrower_id):
+    borrower = BorrowList.objects.get(id=borrower_id)
+    book = Book.objects.get(id=borrower.borrowedBookID)
+    book.borrow_user = None
+    book.save()
+    borrower.delete()
+
+    return render(request, 'LibraryApp/borrow_request_refused.html', {'borrow': borrower})
 
 
 def feedback(request):

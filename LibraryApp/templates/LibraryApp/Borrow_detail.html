@@ -4,16 +4,16 @@
         <h3>{{ borrower.userName }} Full Details</h3>
         <p>Borrower Name: {{ borrower.userName }}</p>
         <p>Book Name: {{ borrower.borrowedBook }}</p>
-        <p>Period: {{ borrower.period }}</p>
+        <p>Period: {{ borrower.period }} days</p>
     </div>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="buttonDiv">
             <input type="button" value="Accept"
-                   onclick="location.href='{% url 'borrow_request_accepted' borrower %}'">
+                   onclick="location.href='{% url 'borrow_request_accepted' borrower.id %}'">
             <input type="button" value="Refuse"
-                   onclick="location.href='{% url 'borrow_request_refused' borrower %}'">
+                   onclick="location.href='{% url 'borrow_request_refused' borrower.id %}'">
         </div>
     </form>
 
