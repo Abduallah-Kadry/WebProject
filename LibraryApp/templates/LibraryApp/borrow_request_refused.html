@@ -1,0 +1,10 @@
+{% extends 'LibraryApp/base.html' %}
+{% block  body %}
+    <h3>Borrow request has been refused</h3>
+
+    <div class="buttonDiv">
+        <input type="button" value="Go back to Borrow List"
+               onclick="location.href='{% url 'borrow_list' borrow.borrowerID %}'">
+    </div>
+
+{% endblock %}
