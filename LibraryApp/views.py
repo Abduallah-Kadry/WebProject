@@ -119,6 +119,16 @@ def book_edit(request, book_id, account_id):
     return render(request, 'LibraryApp/editBook.html', {'book': book, 'account': account})
 
 
+def cancel_borrow(request, book_id, account_id):
+    account = Accounts.objects.get(id=account_id)
+    book = Book.objects.get(id=book_id)
+    if request.method == 'POST':
+        book.borrow_user = None
+        book.save()
+        return redirect('bookDetails', book_id, account_id)
+    return render(request, 'LibraryApp/cancel_borrow.html', {'account': account, 'book': book})
+
+
 def borrow_book_list(request, account_id):
     borrow_list = BorrowList.objects.all()
     book = Book.objects.all()

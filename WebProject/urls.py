@@ -41,6 +41,7 @@ urlpatterns = [
 
     path('borrow_request_accepted/<int:borrower_id>',views.borrow_request_accepted,name='borrow_request_accepted' ),
     path('borrow_request_refused/<int:borrower_id>',views.borrow_request_refused,name='borrow_request_refused' ),
+    path('cancelBorrow/<int:book_id>/<int:account_id>',views.cancel_borrow,name='cancelBorrow' ),
 
     path('add_book_successful/<int:account_id>',views.add_book_successful,name='add_book_successful' ),
     path('borrow_request_successful/<int:account_id>',views.borrow_request_successful,name='borrow_request_successful' ),

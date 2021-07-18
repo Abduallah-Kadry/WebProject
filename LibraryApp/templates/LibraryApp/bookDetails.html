@@ -22,6 +22,10 @@
             <input type="button" value="Edit Book" onclick="location.href='{% url 'editBook' book.id account.id %}'">
             <input type="button" value="Delete Book"
                    onclick="location.href='{% url 'deleteBook' book.id account.id %}'">
+            {% if book.borrow_user != None %}
+              <input type="button" value="Cancel Borrow"
+               onclick="location.href='{% url 'cancelBorrow' book.id account.id %}'">
+            {% endif %}
             <input type="button" value="Back" onclick="location.href='{% url 'Admin'  account.id %}'">
         {% endif %}
 
