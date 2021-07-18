@@ -32,4 +32,5 @@ class BorrowList(models.Model):
 
     userName = models.CharField(max_length=100)
     borrowedBook = models.CharField(max_length=100)
+    borrowedBookID = models.IntegerField()
     period = models.IntegerField()

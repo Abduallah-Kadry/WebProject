@@ -119,14 +119,19 @@ def book_edit(request, book_id, account_id):
     return render(request, 'LibraryApp/editBook.html', {'book': book, 'account': account})
 
 
-def borrow_book_list(request):
+def borrow_book_list(request, account_id):
     borrow_list = BorrowList.objects.all()
-    return render(request, 'LibraryApp/Borrow_List.html', {'borrow_list': borrow_list})
+    book = Book.objects.all()
+    account = Accounts.objects.get(id=account_id)
+    return render(request, 'LibraryApp/Borrow_List.html',
+                  {'borrow_list': borrow_list, 'book': book, 'account': account})
 
 
-def borrow_detail(request, borrow_id):
+def borrow_detail(request, borrow_id, account_id):
+    book = Book.objects.all()
+    account = Accounts.objects.get(id=account_id)
     borrower = BorrowList.objects.get(id=borrow_id)
-    return render(request, 'LibraryApp/Borrow_detail.html', {'borrower': borrower})
+    return render(request, 'LibraryApp/Borrow_detail.html', {'borrower': borrower, 'book': book, 'account': account})
 
 
 def book_borrow(request, book_id, account_id):
@@ -135,11 +140,9 @@ def book_borrow(request, book_id, account_id):
 
     if request.method == 'POST':
         period = request.POST.get('period')
-        borrow_list = BorrowList(userName=account.name, borrowedBook=book.name, period=period)
+        borrow_list = BorrowList(userName=account.name, borrowedBook=book.name, period=period,borrowedBookID=book.id)
         borrow_list.save()
-
         return redirect('borrow_request_successful', account_id)
-
     return render(request, 'LibraryApp/borrow.html', {'book': book, 'account': account})
 
 

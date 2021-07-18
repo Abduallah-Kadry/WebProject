@@ -2,7 +2,7 @@
 {% block  body %}
     <div class="bookList">
         {% for borrower  in borrow_list %}
-            <a href="{% url 'borrow_detail' borrower.id%}">{{ borrower.userName }}</a><br>
+            <a href="{% url 'borrow_detail' borrower.id account.id %}">{{ borrower.userName }}</a><br>
         {% endfor %}
     </div>
 
